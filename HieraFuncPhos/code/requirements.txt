@@ -1,0 +1,7 @@
+# Prepared feature caches only; raw ESM/structure feature generation is separate.
+# Install the PyTorch build appropriate for the target CPU/CUDA environment.
+torch>=2.3,<3
+numpy>=1.24,<3
+pandas>=2.0,<3
+pyarrow>=14
+scikit-learn>=1.3,<2

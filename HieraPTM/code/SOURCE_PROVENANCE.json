@@ -1,0 +1,206 @@
+{
+  "schema_version": 1,
+  "origin": "final frozen CA2-C all-eight canonical snapshot",
+  "historical_search_entrypoints_included": false,
+  "original_training_config_sha256": "5020a0119e863a8405f2d156ae48c248b3e11a7f383ff031914cf7853753e1b5",
+  "files": [
+    {
+      "file": "src/sequence_backbone.py",
+      "source": "code/src/deepmvp_modular_fusion_models_v1.py",
+      "source_sha256": "dd1e90393ab66708962acc0b0eb9da2035bd475be2c6a997c09cab8279f09c03",
+      "sha256": "8530125e8e6dedf6ee314308fd238cce5e73b2e8052367f2e2389bb439bc8991",
+      "retained_symbols": "all; public naming changes only",
+      "pre_rename_sha256": "dd1e90393ab66708962acc0b0eb9da2035bd475be2c6a997c09cab8279f09c03",
+      "implementation_changes": "public names only; tensor parameter keys and math preserved"
+    },
+    {
+      "file": "src/backbones.py",
+      "source": "code/src/deepmvp_esm_moeformer_backbones_v1.py",
+      "source_sha256": "801f328b378cd0ac3fb1c7059ce5cc8d41a995b8d96b91c930ffee573b665450",
+      "sha256": "801f328b378cd0ac3fb1c7059ce5cc8d41a995b8d96b91c930ffee573b665450",
+      "retained_symbols": "all; byte-identical",
+      "retained_implementations_unchanged": true
+    },
+    {
+      "file": "src/esm_fusion.py",
+      "source": "code/src/deepmvp_esm_fusion_models_v1.py",
+      "source_sha256": "9faa15ede84f8799684a9c574a561277d0f0374a5e6b7acb45e46674d0375e1e",
+      "sha256": "d00329cc322ef00a4be9cacb8eb5a934cfd9e35a4120da8fd233f33f1c942324",
+      "retained_symbols": "all; byte-identical",
+      "retained_implementations_unchanged": true
+    },
+    {
+      "file": "src/hieraptm.py",
+      "source": "code/src/deepmvp_graph_improvement_models_v1.py",
+      "source_sha256": "f561979a416a53f276e48a4b5374c8720475a0fb0755db3eda932457e926e643",
+      "sha256": "03a9b3bf92977700da68b052c82fd58c09a9c2c0d76a1d1130ce145bfddd9141",
+      "retained_symbols": "all; public naming changes only",
+      "pre_rename_sha256": "f561979a416a53f276e48a4b5374c8720475a0fb0755db3eda932457e926e643",
+      "implementation_changes": "public names only; tensor parameter keys and math preserved"
+    },
+    {
+      "file": "src/graph_layers.py",
+      "source": "code/src/deepmvp_graph_late_fusion_model_v1.py",
+      "source_sha256": "ff585b879f4098a6f6cabc2dfe430be4fec1da483957d85891d97c58ad0d662f",
+      "sha256": "b22e56d5b3dc3b82dba26cdb31a7f1de90f0f519b490f05c19a1b209efdc0af3",
+      "retained_symbols": "all; public naming changes only",
+      "pre_rename_sha256": "ff585b879f4098a6f6cabc2dfe430be4fec1da483957d85891d97c58ad0d662f",
+      "implementation_changes": "public names only; tensor parameter keys and math preserved"
+    },
+    {
+      "file": "src/esm_cache.py",
+      "source": "code/src/esm_residue_window_cache_v1.py",
+      "source_sha256": "c5aff982bc780df796d8db05376c7b1ff15e1e22489c23990d8ef8f42867499f",
+      "sha256": "c5aff982bc780df796d8db05376c7b1ff15e1e22489c23990d8ef8f42867499f",
+      "retained_symbols": "all; byte-identical",
+      "retained_implementations_unchanged": true
+    },
+    {
+      "file": "src/training.py",
+      "source": "code/src/train_ca2c_relaxed_fig3_all8_v1.py",
+      "source_sha256": "8c10a1f265617a1fcc486adf0b97a0ac06b144ea4eeeff961b008b9bde905785",
+      "sha256": "414255e97744cf375c05b08cdf0edc45658f3bfb2cf2c9d72b19a3d413e68a36",
+      "retained_symbols": [
+        "train_sequence_backbone",
+        "train_hieraptm"
+      ],
+      "pre_rename_sha256": "fd6edee8cde5c0bf0f327d2fd3a615754badbc5a0e17fe7c18227c6ccef55eee",
+      "implementation_changes": "test execution and supporting utilities moved into dedicated modules",
+      "historical_retained_symbols": [
+        "MissingSafeESMCollator",
+        "PAPER_AUROC",
+        "ROOT",
+        "RelaxedGraphCollator",
+        "SPLIT_NAME",
+        "SafeFullProteinNodeReader",
+        "evaluate_final",
+        "indices",
+        "load_checkpoint",
+        "make_loader",
+        "plot_training",
+        "prediction_rows",
+        "save_checkpoint",
+        "save_test_figure",
+        "smoke",
+        "train_a1",
+        "train_ca2c"
+      ],
+      "split_into": [
+        "src/data.py",
+        "src/checkpoints.py",
+        "src/reporting.py",
+        "src/training.py",
+        "src/evaluation.py"
+      ],
+      "removed_public_utilities": [
+        "smoke"
+      ]
+    },
+    {
+      "file": "src/utils.py",
+      "source": "code/src/deepmvp_esm_fusion_scientific_training_v1.py",
+      "source_sha256": "58de3f600a8f02b8616ebcfef9d95198b67bb155f39f6aff8b79ad29d5836a7c",
+      "sha256": "a23970593bcda71abbf2122e721c97972c10a8b804c29bb80476b7c1d82e86ad",
+      "retained_symbols": [
+        "EpochSampler",
+        "FusionIndexedDataset",
+        "atomic_json",
+        "atomic_text",
+        "atomic_tsv",
+        "canonical_sha256",
+        "capture_rng_state",
+        "is_better",
+        "restore_rng_state",
+        "save_checkpoint",
+        "seed_everything",
+        "sha256_file"
+      ],
+      "retained_implementations_unchanged": true
+    },
+    {
+      "file": "src/sequence_optimization.py",
+      "source": "code/src/deepmvp_modular_scientific_training_v1.py",
+      "source_sha256": "0e73a13d2feb2f7c170f2311f530f270153cbfff43a7eb2353a6f5a175d42907",
+      "sha256": "1f97d9ca697bdbb59ecaf2ade6ad95a1b3e9d4fa645d78b1b6fea30b938f50f2",
+      "retained_symbols": [
+        "ESM_MODELS",
+        "evaluate",
+        "forward_model",
+        "train_epoch"
+      ],
+      "pre_rename_sha256": "bdcc2b0987d064a05d4b7295292986784ddc7e435c1562d1f80033beb9511599",
+      "implementation_changes": "public names only; tensor parameter keys and math preserved",
+      "historical_retained_symbols": [
+        "ESM_MODELS",
+        "evaluate",
+        "forward_model",
+        "train_epoch"
+      ]
+    },
+    {
+      "file": "src/structure_optimization.py",
+      "source": "code/src/train_cross_attention_ca2_screen_v1.py",
+      "source_sha256": "c5256c320299d45ca9fe8717ba316fc728705813c0c438d067a6af273935388b",
+      "sha256": "8c61075d83f6118c66a801ebba3b41f622ed2d59ae13bb8a7714016bc0d0360e",
+      "retained_symbols": [
+        "build_optimizer",
+        "logits_and_residual",
+        "parameter_family",
+        "schedule_multiplier",
+        "train_epoch"
+      ],
+      "retained_implementations_unchanged": true
+    },
+    {
+      "file": "src/graph_data.py",
+      "source": "code/src/train_graph_late_fusion_screen_v1.py",
+      "source_sha256": "28d7c37b09359cfc18419b531d06064a3fa65f0499efa57d390e143dfdad2b3c",
+      "sha256": "11c5ff586b0cf1668ff5699eff020c00a2df540cab1715314fbf679ac22ae92f",
+      "retained_symbols": [
+        "FullProteinNodeReader",
+        "GraphCache",
+        "evaluate",
+        "model_logits",
+        "move"
+      ],
+      "retained_implementations_unchanged": true
+    },
+    {
+      "file": "src/metrics.py",
+      "source": "code/src/transformer_moe_training_v1.py",
+      "source_sha256": "55f7ba8d061b253f7f321a1ff8270466bb99741fd64d34c1354462f737d658a3",
+      "sha256": "f1d5257fd46c43a7d36b1b07c4397a146d02f642b90f05c200c5182a500ca0dc",
+      "retained_symbols": [
+        "_atomic_rows",
+        "binary_metrics",
+        "write_curves"
+      ],
+      "retained_implementations_unchanged": true
+    }
+  ],
+  "model_and_training_math_changed": false,
+  "public_naming": {
+    "sequence_stage": "Sequence Backbone",
+    "full_model": "HieraPTM",
+    "output_directories": [
+      "sequence_backbone",
+      "HieraPTM"
+    ],
+    "historical_labels": {
+      "A1": "Sequence Backbone",
+      "CA2-C": "HieraPTM"
+    },
+    "training_module": {
+      "train_ca2c_relaxed_fig3_all8_v1": "training"
+    },
+    "state_dict_parameter_names_changed": false
+  },
+  "module_split": {
+    "pre_refactor_training_sha256": "6f8607f4c196f706a398ae18ab2849d9e557cf83665fa00b84ef323aa1e87cc4",
+    "training_and_test_execution_separated": true,
+    "model_tensor_keys_changed": false,
+    "test_entrypoint": "evaluate.py",
+    "training_entrypoint": "train.py",
+    "verification_policy": "static syntax, imports and source-structure checks only"
+  }
+}

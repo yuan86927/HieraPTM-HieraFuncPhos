@@ -1,0 +1,138 @@
+{
+  "source_archive": "Task2/20_hieraptm_remote_rep01_10_results/code",
+  "policy": "Model math retained; single fixed split orchestration replaces historical CV runners.",
+  "source_files": [
+    {
+      "source": "deepmvp_esm_moeformer_backbones_v1.py",
+      "source_sha256": "801f328b378cd0ac3fb1c7059ce5cc8d41a995b8d96b91c930ffee573b665450",
+      "output": "hieraptm/models/backbones.py",
+      "change": "relative imports only"
+    },
+    {
+      "source": "deepmvp_esm_fusion_models_v1.py",
+      "source_sha256": "9faa15ede84f8799684a9c574a561277d0f0374a5e6b7acb45e46674d0375e1e",
+      "output": "hieraptm/models/esm_fusion.py",
+      "change": "relative imports only"
+    },
+    {
+      "source": "deepmvp_modular_fusion_models_v1.py",
+      "source_sha256": "dd1e90393ab66708962acc0b0eb9da2035bd475be2c6a997c09cab8279f09c03",
+      "output": "hieraptm/models/sequence_fusion.py",
+      "change": "relative imports only"
+    },
+    {
+      "source": "deepmvp_graph_late_fusion_model_v1.py",
+      "source_sha256": "ff585b879f4098a6f6cabc2dfe430be4fec1da483957d85891d97c58ad0d662f",
+      "output": "hieraptm/models/structure_graph.py",
+      "change": "relative imports only"
+    },
+    {
+      "source": "deepmvp_graph_improvement_models_v1.py",
+      "source_sha256": "0a19fbffae5a512c7811a73cefb5769bd8bb5fa6004b2275cea2af38934c190d",
+      "output": "hieraptm/models/graph_encoder.py",
+      "change": "relative imports only"
+    },
+    {
+      "source": "task2_hieraptm_full_joint_lora_v2_model.py",
+      "source_sha256": "cd9e6635e94500193fad40d4e032e74b82b44549bcc1a6dfdf5f76fc0f5aed05",
+      "output": "hieraptm/models/functional.py",
+      "change": "relative imports only"
+    },
+    {
+      "source": "task2_hieradyn_lg_v2_model.py",
+      "source_sha256": "1ecb64d8a7f2bd3da65e2d6dd3b351f77c12b545acc4bd512be5fdc5b824b5d0",
+      "output": "hieraptm/models/dynamics.py",
+      "change": "relative imports only"
+    },
+    {
+      "source": "task2_hieraptm_func_transfer_model.py",
+      "source_sha256": "74950328412cce8c1e97f8e57dcfa74228fdd60845b67100f7a0c4062b271976",
+      "definitions": [
+        "QVLoRALinear"
+      ]
+    },
+    {
+      "source": "task2_hieraptm_func_lora_v2_model.py",
+      "source_sha256": "ee17990052a5c3fc7206a01cf9cbdaf8fccdb718e1077dad26d93df3b11156e4",
+      "definitions": [
+        "ZeroInitLoRALinear"
+      ]
+    },
+    {
+      "source": "task2_hieradyn_func_model.py",
+      "source_sha256": "6995b39c5e738e48a16832f66b4521c5b9bd94afe004cb2b58bb6a59fb0239e9",
+      "definitions": [
+        "masked_attention"
+      ]
+    },
+    {
+      "source": "task2_train_hieradyn_func_rep01.py",
+      "source_sha256": "731f44b1757791d159e79ea024392cb60b6de8ce0e297c5fa106caeec30b5867",
+      "definitions": [
+        "InstrumentedBase",
+        "base_forward"
+      ]
+    },
+    {
+      "source": "mmf_07_train_mmfuncphos.py",
+      "source_sha256": "bab9c2e615b5f139ae32c5048336341db49cb69d61701bf025d7ce985a726130",
+      "definitions": [
+        "binary_metrics"
+      ]
+    },
+    {
+      "source": "task2_train_hieraptm_func_scratch.py",
+      "source_sha256": "1e9348f31f77b94f37243eddb84cad1fe60b0e0566fa4464c1141f8b060c3753",
+      "definitions": [
+        "metrics",
+        "subgroup_metrics"
+      ]
+    },
+    {
+      "source": "task2_train_hieraptm_full_joint_lora_v2.py",
+      "source_sha256": "c7fba565aa5827305058d373abf98b1b932619ab2363bead224fc5329fc4135d",
+      "definitions": [
+        "optimizer_groups",
+        "set_warmup"
+      ]
+    },
+    {
+      "source": "remote_train.py",
+      "source_sha256": "cec9cb8f05d750f7e58a2bacebc6793ad412dc5b766d8547921d049b301c72f9",
+      "definitions": [
+        "epoch"
+      ]
+    },
+    {
+      "source": "task2_build_hieradyn_lg_v2_cache.py",
+      "source_sha256": "ae65733e025355c5dfd338ec7a1f425112c2d8d5475b0ebab04b9284905210de",
+      "definitions": [
+        "MOTION",
+        "RESPONSE",
+        "NETWORK",
+        "FEATURE_NAMES"
+      ]
+    },
+    {
+      "source": "task2_train_hieradyn_lg_v2_auroc_rep01.py",
+      "source_sha256": "151b865d2c36e8367b7db5152382e1d0875f7a9289ae5ad3ebf2ab6f7e47189d",
+      "definitions": [
+        "tensor_sha",
+        "configuration",
+        "run_model",
+        "autocast",
+        "train_batch",
+        "predict",
+        "gradient_report"
+      ]
+    },
+    {
+      "source": "task2_train_hieradyn_lg_v2_auroc_rep01.py",
+      "source_sha256": "151b865d2c36e8367b7db5152382e1d0875f7a9289ae5ad3ebf2ab6f7e47189d",
+      "definitions": [
+        "fit_fold"
+      ]
+    }
+  ],
+  "model_execution_performed": false
+}

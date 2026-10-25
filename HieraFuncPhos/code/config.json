@@ -1,0 +1,41 @@
+{
+  "splits": "data/splits",
+  "feature_cache_pattern": "features/rep{rep:02d}",
+  "output": "runs",
+  "task1_weights": {
+    "ST": "weights/phosphorylation_st/best.pt",
+    "Y": "weights/phosphorylation_y/best.pt"
+  },
+  "runtime": {
+    "device": "cuda",
+    "threads": 4,
+    "workers": 2,
+    "amp_dtype": "bfloat16"
+  },
+  "lora": {
+    "batch_size": 32,
+    "epochs": 60,
+    "warmup_epochs": 4,
+    "patience": 10,
+    "lora_lr": 0.0001,
+    "fusion_lr": 0.00003,
+    "head_lr": 0.0003,
+    "weight_decay": 0.01,
+    "dropout": 0.30,
+    "lora_dropout": 0.05,
+    "head_width": 128
+  },
+  "dynamics": {
+    "batch_size": 32,
+    "epochs": 40,
+    "patience": 8,
+    "lr": 0.0003,
+    "dropout": 0.25,
+    "weight_decay": 0.01,
+    "max_logit_delta": 0.5,
+    "logit_penalty": 0.05,
+    "repr_penalty": 0.01,
+    "rank_weight": 0.01,
+    "monitor": "auroc"
+  }
+}

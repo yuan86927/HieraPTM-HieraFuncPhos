@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "task": "HieraPTM_on_frozen_row_stratified_relaxed_Fig3_style_split",
+  "protocol": {
+    "outer_split": "existing random_state_42 row-stratified 90/10 split",
+    "outer_test_role": "one-shot relaxed test; never used for epoch, seed or hyperparameter selection",
+    "development_fraction_within_outer_train": 0.1,
+    "training_seed": 20260830,
+    "protein_homology_filtering": false,
+    "protein_overlap_expected": true,
+    "formal_strict_test_used": false,
+    "development_seed_by_head": {
+      "acetylation_k": 20260830,
+      "glycosylation_n": 20260830,
+      "methylation_k": 20260830,
+      "methylation_r": 20260830,
+      "phosphorylation_y": 20260830,
+      "sumoylation_k": 20260830,
+      "ubiquitination_k": 20260831,
+      "phosphorylation_st": 20260835
+    }
+  },
+  "head_order": [
+    "acetylation_k",
+    "glycosylation_n",
+    "methylation_k",
+    "methylation_r",
+    "phosphorylation_y",
+    "sumoylation_k",
+    "ubiquitination_k",
+    "phosphorylation_st"
+  ],
+  "heads": {
+    "acetylation_k": {
+      "ptm": "Acetylation-K",
+      "center_aa": "K",
+      "expected_rows": 63309,
+      "split_code_sha256": "e528511d3ece59cd58f95bc0ac9dc7fca427092d8208be9a0a0e0ea84f072940"
+    },
+    "glycosylation_n": {
+      "ptm": "N-Glycosylation-N",
+      "center_aa": "N",
+      "expected_rows": 14574,
+      "split_code_sha256": "6e9118a793fcac07432560fea198d2673ffd7462d16fe984383ab6b18b0de663"
+    },
+    "methylation_k": {
+      "ptm": "Methylation-K",
+      "center_aa": "K",
+      "expected_rows": 39833,
+      "split_code_sha256": "8cc397b0e9ba570c215c0cfe9d839ecf9798eaeaa1f95288bfa513d2c2cbd8fc"
+    },
+    "methylation_r": {
+      "ptm": "Methylation-R",
+      "center_aa": "R",
+      "expected_rows": 49721,
+      "split_code_sha256": "280007c8307909e57af145e2a02a91354d2f9130ff59505500017b9309450885"
+    },
+    "phosphorylation_y": {
+      "ptm": "Phosphorylation-Y",
+      "center_aa": "Y",
+      "expected_rows": 58765,
+      "split_code_sha256": "5eb7d052043b0023ee790e2e327c2521b41b867f0f21bc5c16bd0ccb5aecea67"
+    },
+    "sumoylation_k": {
+      "ptm": "Sumoylation-K",
+      "center_aa": "K",
+      "expected_rows": 71468,
+      "split_code_sha256": "ff7e403bb07b56bcaa23a31c398aaded7cf8e0e66c9dec8876a19cb672f35d10"
+    },
+    "ubiquitination_k": {
+      "ptm": "Ubiquitination-K",
+      "center_aa": "K",
+      "expected_rows": 205487,
+      "split_code_sha256": "3036430f86d601d5acfe845194c3d57fa1fb43971d27258723023dc5133aad89"
+    },
+    "phosphorylation_st": {
+      "ptm": "Phosphorylation-ST",
+      "center_aa": "ST",
+      "expected_rows": 613231,
+      "split_code_sha256": "a15e3261eb49ef89e5e99dc45183c1398384dfc171d5bac08e11ac220e3fba8c"
+    }
+  },
+  "paths": {
+    "split_directory": "data/splits",
+    "output_root": "runs/task1",
+    "esm_cache_root": "features/esm2",
+    "esm_cache_registry": "features/esm2/cache_registry.tsv",
+    "prepared_site_index": "features/site_window_cache_index.tsv",
+    "prepared_protein_index": "features/protein_cache_index.tsv",
+    "graph_cache_root": "features/graph"
+  },
+  "sequence_backbone_training": {
+    "optimizer": "AdamW",
+    "learning_rate": 0.0003,
+    "weight_decay": 0.0001,
+    "batch_size": 64,
+    "num_workers": 0,
+    "max_epochs": 80,
+    "early_stopping_patience": 10,
+    "loss": "class_weighted_BCE",
+    "gradient_clip_norm": 1.0,
+    "mixed_precision": "float16",
+    "amp_initial_scale": 8192.0,
+    "amp_backoff_factor": 0.5,
+    "maximum_amp_retries_per_batch": 8,
+    "pin_memory": true,
+    "maximum_open_esm_cache_shards": 2
+  },
+  "hieraptm_training": {
+    "optimizer": "AdamW_discriminative",
+    "weight_decay": 0.0001,
+    "batch_size": 64,
+    "num_workers": 0,
+    "max_epochs": 30,
+    "early_stopping_patience": 6,
+    "loss": "class_weighted_BCE_plus_logit_residual",
+    "residual_logit_lambda": 0.001,
+    "gradient_clip_norm": 1.0,
+    "mixed_precision": "float16",
+    "amp_initial_scale": 8192.0,
+    "amp_backoff_factor": 0.5,
+    "maximum_amp_retries_per_batch": 8,
+    "pin_memory": true,
+    "maximum_open_esm_cache_shards": 2,
+    "warmup_fraction": 0.08,
+    "minimum_lr_ratio": 0.1,
+    "cross_attention_dropout": 0.1,
+    "learning_rates": {
+      "graph_encoder": 5e-05,
+      "cross_attention": 0.0001,
+      "gate_projection": 0.0002
+    }
+  },
+  "graph": {
+    "scope": "whole_AFDB_fragment_centered_subgraph",
+    "top_k_neighbors": 32,
+    "nodes_including_center": 33,
+    "center_neighbor_radius_angstrom": 12.0,
+    "exclude_center_sequence_separation_leq": 2,
+    "neighbor_priority": "outside_sequence61_first_then_distance_then_plddt",
+    "spatial_edge_threshold_angstrom": 8.0,
+    "include_sequence_adjacent_edges": true,
+    "include_self_loops": true
+  }
+}
