@@ -64,3 +64,9 @@ The code for each model is organized in its respective directory and includes tr
 ## Citation
 
 If this project is helpful to your research, please cite the associated paper. Full citation details will be added in a future update.
+
+## License
+
+The original project source code is released under the [MIT License](LICENSE).
+Third-party data and materials remain subject to their original licenses and
+terms of use. The MIT License does not grant additional rights to those materials.
