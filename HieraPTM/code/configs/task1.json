@@ -1,24 +1,8 @@
 {
-  "schema_version": 1,
-  "task": "HieraPTM_on_frozen_row_stratified_relaxed_Fig3_style_split",
   "protocol": {
-    "outer_split": "existing random_state_42 row-stratified 90/10 split",
-    "outer_test_role": "one-shot relaxed test; never used for epoch, seed or hyperparameter selection",
-    "development_fraction_within_outer_train": 0.1,
-    "training_seed": 20260830,
-    "protein_homology_filtering": false,
-    "protein_overlap_expected": true,
-    "formal_strict_test_used": false,
-    "development_seed_by_head": {
-      "acetylation_k": 20260830,
-      "glycosylation_n": 20260830,
-      "methylation_k": 20260830,
-      "methylation_r": 20260830,
-      "phosphorylation_y": 20260830,
-      "sumoylation_k": 20260830,
-      "ubiquitination_k": 20260831,
-      "phosphorylation_st": 20260835
-    }
+    "outer_split": "existing row-stratified 90/10 split",
+    "outer_test_role": "one-shot relaxed test; never used for epoch or hyperparameter selection",
+    "development_fraction_within_outer_train": 0.1
   },
   "head_order": [
     "acetylation_k",
