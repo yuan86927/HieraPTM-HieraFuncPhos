@@ -1,4 +1,4 @@
-# Task1: Complete Training and Evaluation Code for Eight PTM Heads
+# Complete Training and Evaluation Code for Eight PTM Heads
 
 This directory provides the final HieraPTM model definitions, two-stage training, data loading, validation-based checkpoint selection, checkpoint recovery, and evaluation on the fixed test set. Each of the eight PTM heads is trained separately.
 
