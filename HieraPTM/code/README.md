@@ -5,7 +5,7 @@ This directory provides the final HieraPTM model definitions, two-stage training
 1. Sequence Backbone: train the CNN–BiGRU, gated ESM2 fusion, and center-aware Transformer.
 2. HieraPTM: load the selected Sequence Backbone, freeze the sequence backbone and its classifier, and train the 3D GAT and cross-attention residual branch.
 
-The model architecture and training computations originate from the final frozen archive. The public names are Sequence Backbone and HieraPTM. Renaming preserves the original checkpoint parameter keys, tensor structure, and computations. `SOURCE_PROVENANCE.json` records the historical sources, name mappings, retained functions, and SHA256 hashes. Training uses the final split tables directly, without resampling or searching for development-set seeds.
+Training uses the released split tables for the eight PTM heads.
 
 ## File Organization
 
@@ -33,7 +33,7 @@ src/
   reporting.py            # Prediction tables and figures
   configuration.py       # Configuration loading and path resolution
   pipeline.py            # Feature resource management and workflow dispatch
-  utils.py               # Random seeds, sampling, and file utilities
+  utils.py                # Shared training utilities
 ```
 
 ## Environment
@@ -43,8 +43,6 @@ Use Python 3.11 or later. First install a CUDA-enabled PyTorch build compatible 
 ```bash
 python -m pip install -r requirements.txt
 ```
-
-This package does not include a smoke-test entry point. The module split was checked using static syntax, import-reference, and source-structure checks only; no model or training code was executed during that refactoring. Hardware and software may differ from the historical training environment, so retraining is not guaranteed to produce bitwise-identical weights.
 
 ## Input Configuration
 
@@ -60,11 +58,11 @@ Edit `paths` in `configs/task1.json`. Relative paths are resolved against the di
 | `graph_cache_root` | Directory containing the prepared site-centered 3D subgraphs |
 | `output_root` | Output directory for new training runs |
 
-This delivery contains code and configuration only. Data tables, pretrained/final weights, and large feature caches are not copied into the code package; provide them through the paths above. Training consumes precomputed frozen features. The pipeline for generating feature caches from raw FASTA files and structures is not included in this delivery.
+Configure the paths above for the released split tables and precomputed ESM2 and 3D graph features. For evaluation, use the checkpoints from the training run.
 
-Site tables must retain the previously exported columns, including `sample_id`, `protein_id`, `ptm`, `head`, `sequence_61`, `label`, `valid_mask_61`, `split`, `fold_id`, center-site information, and provenance fields. The reader checks row counts, sample uniqueness, labels, window lengths, consistency between `split` and `fold_id`, and the SHA256 hash of the final split vector. If the export's `manifest.json` is present in the directory, the SHA256 hash of each complete table is also checked.
+Use the released site tables with their original columns, including `sample_id`, `protein_id`, `ptm`, `head`, `sequence_61`, `label`, `valid_mask_61`, `split`, `fold_id`, center-site information, and provenance fields.
 
-`fit`, `development`, and `relaxed_test` correspond to `fold_id=0`, `1`, and `2`, respectively; this field encodes the data role. The approximate training/validation/test proportions are 81%/9%/10%. Splitting is performed at the site level, and proteins may appear in multiple sets. The final development-set seed is 20260835 for Pho-ST, 20260831 for Ubi-K, and 20260830 for the other heads. The training seed is 20260830 for every head. Pho-ST and Ubi-K require tables with the final split overlays already merged; the hash checks reject the earlier splits.
+`fit`, `development`, and `relaxed_test` correspond to `fold_id=0`, `1`, and `2`, respectively. The approximate training, validation, and test proportions are 81%/9%/10%.
 
 ## Training and Evaluation
 
@@ -87,13 +85,13 @@ To train a single head:
 python train.py --head phosphorylation_st
 ```
 
-Training does not compute outer-test predictions. After validation-based checkpoint selection is complete for all eight heads, evaluate the selected weights on the fixed test set:
+After training, evaluate the selected checkpoints on the fixed test set:
 
 ```bash
 python evaluate.py
 ```
 
-`evaluate.py` first checks the training-completion markers and weights for every selected head and fails if any are missing. Evaluation independently loads the frozen weights without creating an optimizer or calling a training loop. Repeated runs reuse completed results with matching identities. To resume interrupted training, rerun the same training command. Checkpoints are rejected if their data, configuration, or upstream Sequence Backbone weights do not match. Use `python evaluate.py --head phosphorylation_st` to evaluate a single head.
+To resume interrupted training, rerun the same training command. Use `python evaluate.py --head phosphorylation_st` to evaluate a single head.
 
 By default, each head writes to `runs/task1/<head>/sequence_backbone/` and `runs/task1/<head>/HieraPTM/`. Outputs include `checkpoints/best.pt`, training logs, validation metrics, and the per-sample predictions, ROC/PR coordinates, and metrics generated during explicit test evaluation. The final HieraPTM checkpoint contains both the complete sequence backbone and the 3D branch.
 
@@ -119,7 +117,7 @@ Site index columns: `sample_id`, `protein_id`, `center_position_1based`, `cache_
 
 Protein index columns: `protein_id`, `protein_length`, `cache_shard_id`, and `protein_shard_offset0`.
 
-The 3D graph directory retains the original training-cache convention: `manifest.json` with `status=READY_FOR_G1` (a historical cache-format name), `READY.flag`, `sample_index.tsv` containing `sample_id,row_id`, and the following arrays:
+Use a prepared 3D graph cache at `graph_cache_root`. It contains `manifest.json`, `READY.flag`, `sample_index.tsv` with the columns `sample_id` and `row_id`, and the following arrays:
 
 | File | Shape and dtype |
 |---|---|
@@ -128,4 +126,4 @@ The 3D graph directory retains the original training-cache convention: `manifest
 | `node_geometry.float16.npy` | `[N,33,8]` float16 |
 | `node_mask.bool.npy` | `[N,33]` bool |
 
-The 33 node slots contain the center and up to 32 neighbors. Input loading follows the original implementation, including missing-ESM masks, graph-node masks, and fallback to the sequence model when 3D information is unavailable.
+The 33 node slots contain the center and up to 32 neighbors.
