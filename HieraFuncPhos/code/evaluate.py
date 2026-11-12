@@ -1,4 +1,3 @@
-"""Score the selected final HieraPTM model on fixed validation or test data."""
 from pathlib import Path
 import argparse
 
