@@ -1,4 +1,3 @@
-"""Task1 train command; implementation lives in src/."""
 from __future__ import annotations
 import argparse
 import os
