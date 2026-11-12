@@ -1,5 +1,3 @@
-"""Read self-contained final split tables; no resampling or split overlays."""
-
 from __future__ import annotations
 
 import hashlib
