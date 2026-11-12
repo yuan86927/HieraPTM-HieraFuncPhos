@@ -10,30 +10,52 @@ Training uses the released split tables for the eight PTM heads.
 ## File Organization
 
 ```text
-train.py                  # Training command
-evaluate.py               # Evaluation command
-configs/task1.json        # Parameters and input paths for all eight heads
-src/
-  models.py               # Public model interface
-  sequence_backbone.py    # Sequence Backbone
-  hieraptm.py             # HieraPTM 3D branch and complete model
-  backbones.py            # CNN, BiGRU, and center-aware Transformer
-  esm_fusion.py           # ESM projection and gating
-  graph_layers.py         # GAT layers
-  dataset.py              # Final split tables and tensor loading
-  data.py                 # Batch assembly, data loaders, and input checks
-  esm_cache.py            # ESM feature shard reader
-  graph_data.py           # Graph cache reader and validation helpers
-  training.py             # Two-stage training and validation-based selection
-  sequence_optimization.py # Sequence backbone training/validation per epoch
-  structure_optimization.py # 3D branch optimizer, scheduler, and training per epoch
-  evaluation.py           # Selected checkpoint loading, test inference, and metrics
-  checkpoints.py          # Checkpoint saving and training recovery
-  metrics.py              # AUROC, AUPRC, and ROC/PR curve data
-  reporting.py            # Prediction tables and figures
-  configuration.py       # Configuration loading and path resolution
-  pipeline.py            # Feature resource management and workflow dispatch
-  utils.py                # Shared training utilities
+HieraPTM/
+├── code/
+│   ├── README.md                     # Documentation and usage instructions
+│   ├── requirements.txt              # Python dependencies
+│   ├── VALIDATION.json               # Static source validation record
+│   ├── train.py                      # Training entry point
+│   ├── evaluate.py                   # Evaluation entry point
+│   │
+│   ├── configs/
+│   │   └── HieraPTM.json             # Model settings and input paths
+│   │
+│   └── src/
+│       ├── models.py                 # Public model interface
+│       ├── sequence_backbone.py      # Sequence–language backbone
+│       ├── hieraptm.py               # Complete HieraPTM model
+│       ├── backbones.py              # CNN, BiGRU, center-aware Transformer
+│       ├── esm_fusion.py             # ESM-2 projection and residual gating
+│       ├── graph_layers.py           # Structure graph attention layers
+│       │
+│       ├── dataset.py                # Dataset loading and split validation
+│       ├── data.py                   # Batch assembly and data loaders
+│       ├── esm_cache.py              # Frozen ESM-2 feature cache reader
+│       ├── graph_data.py             # 3D graph cache and node features
+│       │
+│       ├── training.py               # Two-stage training workflow
+│       ├── sequence_optimization.py  # Sequence backbone optimization
+│       ├── structure_optimization.py # Structure branch optimization
+│       ├── evaluation.py             # Test inference and evaluation
+│       ├── checkpoints.py            # Checkpoint saving and recovery
+│       │
+│       ├── metrics.py                # AUROC, AUPRC and curve generation
+│       ├── reporting.py              # Prediction tables and figures
+│       ├── configuration.py          # Configuration and path utilities
+│       ├── pipeline.py               # Workflow orchestration
+│       └── utils.py                  # Shared utilities
+│
+└── data/
+    └── splits/
+        ├── acetylation_k.tsv.gz
+        ├── glycosylation_n.tsv.gz
+        ├── methylation_k.tsv.gz
+        ├── methylation_r.tsv.gz
+        ├── phosphorylation_st.tsv.gz
+        ├── phosphorylation_y.tsv.gz
+        ├── sumoylation_k.tsv.gz
+        └── ubiquitination_k.tsv.gz
 ```
 
 ## Environment
