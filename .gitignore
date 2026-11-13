@@ -1,0 +1,65 @@
+# Python bytecode and tool caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+.ipynb_checkpoints/
+
+# Local virtual environments and build products
+.venv/
+venv/
+env/
+build/
+dist/
+*.egg-info/
+
+# Generated training, evaluation, and log files
+runs/
+outputs/
+logs/
+*.log
+
+# Large feature caches and model weights
+# Publish these separately if needed; do not accidentally commit them.
+features/
+weights/
+checkpoints/
+*.npy
+*.npz
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+
+# Local credentials and secrets
+.env
+.env.*
+!.env.example
+.aws/
+.ssh/
+*.pem
+*.key
+id_rsa
+id_ed25519
+
+# Editor and operating-system files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
+*.part
+*.partial
+*~
+
+# Dataset split files (.tsv.gz and .parquet), source code, configuration,
+# documentation, and provenance/checksum records are intentionally kept.

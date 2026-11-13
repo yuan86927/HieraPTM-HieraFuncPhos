@@ -1,0 +1,30 @@
+{
+  "status": "STATIC_CHECKS_PASS",
+  "verification_method": "AST/source inspection only",
+  "python_files": 22,
+  "syntax_valid": true,
+  "local_imports_resolve": true,
+  "circular_imports": false,
+  "unchanged_model_data_optimizer_modules": [
+    "sequence_backbone",
+    "backbones",
+    "esm_fusion",
+    "hieraptm",
+    "graph_layers",
+    "utils",
+    "sequence_optimization",
+    "structure_optimization",
+    "graph_data",
+    "metrics",
+    "esm_cache",
+    "dataset"
+  ],
+  "moved_helpers_source_equivalent": true,
+  "optimization_loop_source_equivalent": true,
+  "configuration_unchanged": true,
+  "independent_training_and_evaluation": true,
+  "smoke_entrypoints_removed": true,
+  "smoke_tests_executed": false,
+  "model_code_executed": false,
+  "formal_training_executed": false
+}
